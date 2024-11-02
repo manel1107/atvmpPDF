@@ -1,0 +1,63 @@
+<?php
+require_once '/vendor/autoload.php';
+
+$produtos = [
+    [
+        'nome' => 'Cinto de couro',
+        'categoria' => 'Cintos',
+        'preco' => 50.00,
+        'descricao' => 'Cinto para segurar suas calças e sua vida.'
+    ],
+    [
+        'nome' => 'Pelúcia de Urso',
+        'categoria' => 'Pelúcias',
+        'preco' => 25.00,
+        'descricao' => 'Fofinho e diverido.'
+    ],
+    [
+        'nome' => 'Bola de futebol',
+        'categoria' => 'Bolas',
+        'preco' => 40.00,
+        'descricao' => 'Não se contente só assistindo jogue também.'
+    ],
+    [
+        'nome' => 'Iphone 18',
+        'categoria' => 'Smartphone',
+        'preco' => 29.999,99,
+        'descricao' => 'Para mostrar aos outros que ao invés de dar entrada numa casa, você prefere ser enganado.'
+    ]
+];
+
+
+$mpdf = new \Mpdf\Mpdf();
+
+
+$dataHora = date('d/m/Y H:i:s');
+$mpdf->WriteHTML("<h1>Relatório de Produtos</h1>");
+$mpdf->WriteHTML("<p>Gerado em $dataHora</p>");
+
+
+$mpdf->WriteHTML("
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+    <table>
+        <tr>
+            <th>Nome </th>
+            <th>Categoria </th>
+            <th>Preço (R$) </th>
+            <th>Descrição </th>
+        </tr>
+");
+
+$mpdf->WriteHTML("</table>");
+
+foreach ($produto as $produto) {
+    echo $produto['nome']."<br/>";
+    echo $produto['categoria']."<br/>";
+    echo $produto['preco']."<br/>";
+    echo $produto['descricao']."<br/>";
+}
+?>
